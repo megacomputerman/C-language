@@ -9,6 +9,11 @@ int g_Ret = 0;
 
 int writeFile( char *pBuffer )
 {
+   if ( !pBuffer )
+   {
+       puts( "Invalid param" );
+       return -1;
+   }
    FILE *fptr;
    fptr = fopen(FNAME, "w");
    if(fptr == NULL)
@@ -25,7 +30,8 @@ int writeFile( char *pBuffer )
 
 int main()
 {
-   char *pBuffer="to write on text file";
+   //char *pBuffer="to write on text file";
+   char *pBuffer = NULL;
    g_Ret = writeFile( pBuffer );
    return g_Ret;
 }
