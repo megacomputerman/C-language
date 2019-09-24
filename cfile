@@ -1,0 +1,31 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define FNAME "filename.txt"
+
+int writeFile( char *pBuffer );
+
+int g_Ret = 0;
+
+int writeFile( char *pBuffer )
+{
+   FILE *fptr;
+   fptr = fopen(FNAME, "w");
+   if(fptr == NULL)
+   {
+      printf("Error!");
+      return -1;  
+   }
+   
+   fprintf(fptr,"%s", pBuffer);
+   fclose(fptr);
+   
+   return 0;    
+}
+
+int main()
+{
+   char *pBuffer="to write on text file";
+   g_Ret = writeFile( pBuffer );
+   return g_Ret;
+}
