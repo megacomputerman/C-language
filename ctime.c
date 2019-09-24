@@ -1,19 +1,23 @@
+/******************************************************************************
+
+                            Online C Compiler.
+                Code, Compile, Run and Debug C program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <string.h>
 
+#define FNAME "logme.log"
+#define MAX_SIZE 500
+
+int logme( char *pBuffer );
 void time_( char *pTime );
 
-// Print current date and time in C
-int main(void)
-{
-   char achTime[100];
-   
-   time_( achTime );
-   puts( achTime );
-
-	return 0;
-}
+int g_Ret = 0;
 
 void time_( char *pTime )
 {
@@ -49,12 +53,47 @@ void time_( char *pTime )
 	if (hours < 12)	// before midday
 		printf("Time is : %02d:%02d:%02d am\n", hours, minutes, seconds);
 
-	else	// after midday
+   else	// after midday
    {      
 		printf("Time is : %02d:%02d:%02d pm\n", hours - 12, minutes, seconds);
       hours = hours -12;
    }
+//   sprintf( pTime, "%02d%02d%d-%02d%02d%02d", day, month, year, hours, minutes, seconds );
+   sprintf(pTime, "%s", ctime(&now));
+}
 
-   sprintf( pTime, "%02d%02d%d-%02d%02d%02d", day, month, year, hours, minutes, seconds );
+int logme( char *pBuffer )
+{
+   if ( !pBuffer )
+   {
+       puts( "Invalid param" );
+       return -1;
+   }
+
+    char achAux[MAX_SIZE];
+    char achTime[50];
+    time_(achTime);
+    
+    sprintf( achAux, "%s: %s", achTime, pBuffer );
+    
+    FILE *fptr;
+    fptr = fopen(FNAME, "w");
+    if(fptr == NULL)
+    {
+      printf("Error!");
+      return -1;  
+    }
    
+    fprintf(fptr,"%s", achAux);
+    fclose(fptr);
+   
+    return 0;   
+}
+
+int main()
+{
+   char *pBuffer="to write on text file";
+   //char *pBuffer = NULL;
+   g_Ret = logme( pBuffer );
+   return g_Ret;
 }
