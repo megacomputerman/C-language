@@ -17,8 +17,12 @@ int main(void)
 
 void time_( char *pTime )
 {
+    if ( !pTime )
+    {
+        puts( "Invalid param" );
+        return;
+    }
 	int hours, minutes, seconds, day, month, year;
-
 	time_t now;
 	
 	// Obtain current time
