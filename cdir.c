@@ -3,7 +3,7 @@
 
 typedef enum { false, true } bool;
 
-bool CeckDir( char* pDirName );
+bool checkDir( char* pDirName );
 
 /*
 #
@@ -14,7 +14,7 @@ bool CeckDir( char* pDirName );
 
 int main() 
 {
-   if ( CeckDir("/home/walldurate") ) { puts( "true" ); }
+   if ( checkDir("/home/walldurate") ) { puts( "true" ); }
    else{ puts( "false" ); }
 //   Connected();
    return 0;
@@ -26,7 +26,7 @@ int main()
 # Check if Directory exist
 # ============================================================================
 */
-bool CeckDir( char* pDirName )
+bool checkDir( char* pDirName )
 {
   if ( !pDirName )
   {
